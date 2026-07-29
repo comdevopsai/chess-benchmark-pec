@@ -1,0 +1,21 @@
+# Harbor terminal-bench-science task registration
+[task]
+name = "pec-position-generator"
+description = "Generate procedural legal chess positions with SF labels"
+owner = "comdevopsai"
+
+[[task.phases]]
+name = "setup"
+description = "Install Stockfish 18 + Python dependencies"
+
+[[task.phases]]
+name = "data"
+description = "Generate positions and store in SQLite"
+
+[[task.phases]]
+name = "eval"
+description = "Run calibration evaluation"
+
+[[task.phases]]
+name = "report"
+description = "Output metrics and artifacts"
