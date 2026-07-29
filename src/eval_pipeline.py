@@ -17,8 +17,6 @@ class OpenRouterClient:
 
     def evaluate_position(self, fen: str, system_prompt: str = "You are a chess evaluation expert.") -> dict:
         """Given a FEN position, When eval_position is called, Then return assessment + confidence."""
-        user_message = f"Evaluate this chess position and return JSON: {{"fen": "{fen}", "assessment": "<win|draw|loss>", "confidence": <0.0-1.0>}}"
-
         # If no API key, return mock result for testing
         if not self.api_key:
             return {
@@ -29,9 +27,13 @@ class OpenRouterClient:
                 "mock": True,
             }
 
+        user_message = (
+            'Evaluate this chess position and return JSON with '
+            '"assessment" (win/draw/loss) and "confidence" (0.0-1.0).'
+        )
+
         try:
             import urllib.request
-            import urllib.error
 
             payload = json.dumps({
                 "model": self.model,
